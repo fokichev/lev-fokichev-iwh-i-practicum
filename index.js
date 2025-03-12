@@ -21,10 +21,11 @@ const config = {
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 app.get('/', async (req, res) => {
-    const route = `https://api.hubspot.com/crm/v3/objects/${config.objectType}`;
+    const route = `https://api.hubspot.com/crm/v3/objects/${config.objectType}?properties=name,director,year`;
     try {
         const response = await axios.get(route, { headers: config.headers });
 
+        // console.log(response.data.results);
         res.render('homepage', { title: 'List Custom Objects Table | Integrating With HubSpot I Practicum.', data: response.data.results });
     } catch (error) {
         console.error(error);
@@ -43,7 +44,20 @@ app.get('/update-cobj', async (req, res) => {
 
 // TODO: ROUTE 3 - Create a new app.post route for the custom objects form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
-// * Code for Route 3 goes here
+app.post('/update-cobj', async (req, res) => {
+    const { name, director, year } = req.body;
+    const payload = { properties: { name, director, year } };
+    const route = `https://api.hubspot.com/crm/v3/objects/${config.objectType}`;
+
+    try {
+        const response = await axios.post(route, payload, { headers: config.headers });
+
+        // console.log(response.data);
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+    }
+});
 
 /** 
 * * This is sample code to give you a reference for how you should structure your calls. 

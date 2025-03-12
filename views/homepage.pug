@@ -6,6 +6,15 @@ html
         link(rel="stylesheet", href="/css/style.css")
     body
         h1=title
-        
-        //- update link here
-        //- table of objects here
+        a(href="/update-cobj") Add to this table
+
+        table
+            tr
+                th Name
+                th Director
+                th Year
+            each entry in data
+                tr
+                    td=entry.properties.name
+                    td=entry.properties.director
+                    td=entry.properties.year
