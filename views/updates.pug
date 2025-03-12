@@ -1,0 +1,23 @@
+doctype html 
+html
+    head
+        title=title
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="/css/style.css")
+    body
+        h1=title
+
+        a(href="/") Return to the homepage
+
+        .form-wrapper
+            form(action="/update-cobj", method="POST")
+                label(for="name") Name:
+                input(type="text", id="name", name="name" required)
+
+                label(for="director") Director:
+                input(type="text", id="director", name="director" required)
+
+                label(for="year") Year:
+                input(type="text", id="year", name="year" required)
+
+                input(type="submit", value="Submit")
