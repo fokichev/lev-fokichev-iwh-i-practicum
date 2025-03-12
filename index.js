@@ -20,13 +20,12 @@ const config = {
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
-// * Code for Route 1 goes here
 app.get('/', async (req, res) => {
     const route = `https://api.hubspot.com/crm/v3/objects/${config.objectType}`;
     try {
         const response = await axios.get(route, { headers: config.headers });
 
-        res.json(response.data.results);
+        res.render('homepage', { title: 'List Custom Objects Table | Integrating With HubSpot I Practicum.', data: response.data.results });
     } catch (error) {
         console.error(error);
     }
